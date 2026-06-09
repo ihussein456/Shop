@@ -1,0 +1,37 @@
+# config/deploy.yml
+
+service: shop
+
+image: ihussein456/shop
+
+servers:
+  web:
+    - 192.168.0.1
+
+proxy:
+  ssl: true
+  host: app.example.com
+
+registry:
+  username: ihussein456
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  secret:
+    - RAILS_MASTER_KEY
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+
+volumes:
+  - "storage:/rails/storage"
+
+asset_path: /rails/public/assets
+
+builder:
+  arch: amd64
+
+ssh:
+  user: deploy
